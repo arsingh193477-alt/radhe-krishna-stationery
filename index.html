@@ -1,3 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radhe Krishna Stationery - Professional Store</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f4f6f8}
+header{background:#0f766e;color:white;padding:20px;text-align:center}
+header img{height:70px;display:block;margin:auto}
+nav{background:#111;padding:10px;text-align:center}
+nav a{color:white;margin:0 15px;text-decoration:none;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:20px}
+h2{color:#0f766e}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;border-radius:10px;padding:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:center}
+.card img{width:100%;border-radius:6px}
+button{background:#0f766e;color:white;border:none;padding:8px 14px;border-radius:6px;cursor:pointer}
+button:hover{background:#0d5f59}
+.search{text-align:center;margin-bottom:20px}
+.search input{padding:10px;width:60%;max-width:400px;border-radius:6px;border:1px solid #ccc}
+.cart{position:fixed;right:0;top:0;width:260px;height:100%;background:white;box-shadow:-3px 0 10px rgba(0,0,0,0.15);padding:15px;overflow:auto}
+.cart h3{margin-top:0}
+.cart-item{font-size:14px;margin-bottom:6px}
+.checkout{margin-top:10px}
+footer{background:#111;color:white;text-align:center;padding:15px;margin-top:40px}
+.map iframe{border:0;border-radius:8px;width:100%;height:280px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Radhe Krishna Stationery</h1>
+<p>School & Office Supplies – Best Price in South Delhi</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="container" id="home">
+<h2>Welcome</h2>
+<p>Welcome to Radhe Krishna Stationery Shop. High quality school and office stationery at affordable prices. Place orders online or visit our store.</p>
+</div>
+
+<div class="container" id="products">
+<h2>Our Products</h2>
+<div class="search">
+<input type="text" id="search" placeholder="Search products" onkeyup="searchProduct()">
+</div>
+<div class="products" id="productList">
+<!-- Products will be added later -->
+</div>
+</div>
+
+<div class="container" id="contact">
+<h2>Contact</h2>
+<p><b>Address:</b> C-598, Dakshinpuri, Dr. Ambedkar Nagar, South Delhi 110062</p>
+<p><b>Phone:</b> 9811967930</p>
+<div class="map">
+<iframe src="https://maps.google.com/maps?q=C-598%20Dakshinpuri%20Delhi&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+</div>
+
+<div class="cart">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<h4 id="total"></h4>
+<div class="checkout">
+<button onclick="checkout()">Checkout & Pay</button>
+</div>
+</div>
+
+<a href="https://wa.me/919811967930" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.2)">Order on WhatsApp</a>
+
+<footer>
+<p>© 2026 Radhe Krishna Stationery | South Delhi</p>
+</footer>
+
+<script>
+let total=0;
+function addToCart(product,price){
+let cart=document.getElementById('cartItems');
+let div=document.createElement('div');
+div.className='cart-item';
+div.textContent=product+' - ₹'+price;
+cart.appendChild(div);
+total+=price;
+document.getElementById('total').textContent='Total: ₹'+total;
+}
+function checkout(){
+let upi="upi://pay?pa=9811967930@ptsbi&pn=Radhe%20Krishna%20Stationery&am="+total+"&cu=INR";
+window.location.href=upi;
+}
+function searchProduct(){
+let input=document.getElementById('search').value.toLowerCase();
+let cards=document.querySelectorAll('#productList .card');
+cards.forEach(card=>{
+let name=card.getAttribute('data-name');
+if(name.includes(input)){
+card.style.display='block';
+}else{
+card.style.display='none';
+}
+});
+}
+</script>
+
+</body>
+</html>
 <div class="card">
 <img src="pen.jpg">
 <h3>Ball Pen</h3>
