@@ -7,6 +7,280 @@
 <style>
 body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f5f5}
 header{background:#ff6b00;color:white;padding:20px;text-align:center}
+header img{height:70px;display:block;margin:auto}
+nav{background:#333;padding:10px;text-align:center}
+nav a{color:white;margin:0 15px;text-decoration:none;font-weight:bold}
+section{padding:40px 20px;max-width:1100px;margin:auto;background:white;margin-top:20px;border-radius:8px}
+h2{color:#ff6b00}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#fafafa;padding:15px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.12);text-align:center}
+.card img{width:100%;border-radius:6px}
+button{background:#ff6b00;color:white;border:none;padding:8px 14px;border-radius:5px;cursor:pointer}
+button:hover{background:#e55d00}
+footer{background:#222;color:white;text-align:center;padding:15px;margin-top:30px}
+.search{margin-bottom:20px;text-align:center}
+.search input{padding:10px;width:60%;max-width:400px;border:1px solid #ccc;border-radius:6px}
+.offer{background:#fff3e8;border-left:5px solid #ff6b00;padding:15px;margin-bottom:20px;font-weight:bold}
+.cart{position:fixed;top:0;right:0;width:260px;height:100%;background:white;box-shadow:-3px 0 8px rgba(0,0,0,0.15);padding:15px;overflow:auto}
+.cart h3{margin-top:0}
+.cart-item{font-size:14px;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<header>
+<img src="logo.png" alt="Radhe Krishna Stationery Logo">
+<h1>Radhe Krishna Stationery Shop</h1>
+<p>All School & Office Stationery Available at Best Price</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#offers">Offers</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section id="home">
+<h2>Welcome</h2>
+<p>Welcome to Radhe Krishna Stationery Shop. Yahan school aur office ke sabhi stationery items best price par milte hain.</p>
+</section>
+
+<section id="offers">
+<h2>Special Offers</h2>
+<div class="offer">Ball Pen Starting ₹10</div>
+<div class="offer">Notebook Starting ₹30</div>
+<div class="offer">Student Combo Pack Available</div>
+</section>
+
+<section id="products">
+<h2>Our Products</h2>
+
+<div class="search">
+<input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
+</div>
+
+<div class="products" id="productList">
+
+<div class="card" data-name="pen">
+<img src="pen.jpg">
+<h3>Ball Pen</h3>
+<p>₹10 - ₹20</p>
+<button onclick="addToCart('Ball Pen')">Add to Cart</button>
+</div>
+
+<div class="card" data-name="notebook">
+<img src="notebook.jpg">
+<h3>Notebook</h3>
+<p>₹30 - ₹80</p>
+<button onclick="addToCart('Notebook')">Add to Cart</button>
+</div>
+
+<div class="card" data-name="pencil">
+<img src="pencil.jpg">
+<h3>Pencil</h3>
+<p>₹5 - ₹10</p>
+<button onclick="addToCart('Pencil')">Add to Cart</button>
+</div>
+
+<div class="card" data-name="eraser">
+<img src="eraser.jpg">
+<h3>Eraser</h3>
+<p>₹5</p>
+<button onclick="addToCart('Eraser')">Add to Cart</button>
+</div>
+
+<div class="card" data-name="colors">
+<img src="colors.jpg">
+<h3>Color Box</h3>
+<p>₹40 - ₹120</p>
+<button onclick="addToCart('Color Box')">Add to Cart</button>
+</div>
+
+<div class="card" data-name="school bag">
+<img src="schoolbag.jpg">
+<h3>School Bag</h3>
+<p>₹250 - ₹800</p>
+<button onclick="addToCart('School Bag')">Add to Cart</button>
+</div>
+
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+<p><b>Address:</b> C-598, Dakshinpuri, Dr. Ambedkar Nagar, South Delhi 110062</p>
+<p><b>Phone:</b> 9811967930</p>
+<p><b>Timing:</b> 9:00 AM – 9:00 PM</p>
+</section>
+
+<div class="cart">
+<h3>Cart</h3>
+<div id="cartItems"></div>
+</div>
+
+<a href="https://wa.me/919811967930" target="_blank" style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.2)">WhatsApp Order</a>
+
+<footer>
+<p>© 2026 Radhe Krishna Stationery Shop</p>
+</footer>
+
+<script>
+function addToCart(product){
+let cart=document.getElementById('cartItems');
+let item=document.createElement('div');
+item.className='cart-item';
+item.textContent=product;
+cart.appendChild(item);
+}
+
+function searchProduct(){
+let input=document.getElementById('search').value.toLowerCase();
+let cards=document.querySelectorAll('#productList .card');
+
+cards.forEach(card=>{
+let name=card.getAttribute('data-name');
+if(name.includes(input)){
+card.style.display='block';
+}else{
+card.style.display='none';
+}
+});
+}
+</script>
+
+<section id="admin">
+<h2>Admin - Add Product</h2>
+<p>Shop owner yahan se naya product add kar sakte hain.</p>
+<input id="pname" placeholder="Product Name" style="padding:8px;margin:5px">
+<input id="pprice" placeholder="Price" style="padding:8px;margin:5px">
+<input id="pimage" placeholder="Image file name (example: pen.jpg)" style="padding:8px;margin:5px">
+<button onclick="addProduct()">Add Product</button>
+</section>
+
+<section id="payment">
+<h2>Online Payment</h2>
+<p>Customer UPI se payment kar sakte hain.</p>
+<button onclick="payUPI()">Pay with UPI</button>
+</section>
+
+<script>
+function addProduct(){
+let name=document.getElementById('pname').value;
+let price=document.getElementById('pprice').value;
+let image=document.getElementById('pimage').value;
+
+if(!name||!price||!image){alert('Fill all fields');return}
+
+let container=document.getElementById('productList');
+let div=document.createElement('div');
+div.className='card';
+div.setAttribute('data-name',name.toLowerCase());
+
+div.innerHTML=`<img src="${image}"><h3>${name}</h3><p>₹${price}</p><button onclick="addToCart('${name}')">Add to Cart</button>`;
+
+container.appendChild(div);
+
+saveProducts();
+}
+
+function saveProducts(){
+let items=[];
+document.querySelectorAll('#productList .card').forEach(card=>{
+let title=card.querySelector('h3').innerText;
+let price=card.querySelector('p').innerText;
+let img=card.querySelector('img').getAttribute('src');
+items.push({title,price,img});
+});
+localStorage.setItem('products',JSON.stringify(items));
+}
+
+function loadProducts(){
+let data=localStorage.getItem('products');
+if(!data)return;
+let items=JSON.parse(data);
+let container=document.getElementById('productList');
+container.innerHTML='';
+
+items.forEach(p=>{
+let div=document.createElement('div');
+div.className='card';
+div.setAttribute('data-name',p.title.toLowerCase());
+div.innerHTML=`<img src="${p.img}"><h3>${p.title}</h3><p>${p.price}</p><button onclick="addToCart('${p.title}')">Add to Cart</button>`;
+container.appendChild(div);
+});
+}
+
+function payUPI(){
+window.location.href='upi://pay?pa=example@upi&pn=Radhe%20Krishna%20Stationery&cu=INR';
+}
+
+loadProducts();
+</script>
+
+
+<section id="order">
+<h2>Place Order</h2>
+<p>Customer yahan se order bhej sakte hain.</p>
+<input id="customerName" placeholder="Your Name" style="padding:8px;margin:5px">
+<input id="customerPhone" placeholder="Mobile Number" style="padding:8px;margin:5px">
+<textarea id="orderItems" placeholder="Write items you want" style="padding:8px;margin:5px;width:90%;height:80px"></textarea>
+<br>
+<button onclick="sendOrder()">Send Order on WhatsApp</button>
+</section>
+
+<section id="map">
+<h2>Shop Location</h2>
+<iframe src="https://maps.google.com/maps?q=C-598%20Dakshinpuri%20Dr%20Ambedkar%20Nagar%20Delhi&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;border-radius:8px"></iframe>
+</section>
+
+<section id="invoice">
+<h2>Generate Simple Bill</h2>
+<input id="billItem" placeholder="Item name" style="padding:8px;margin:5px">
+<input id="billPrice" placeholder="Price" style="padding:8px;margin:5px">
+<button onclick="addBillItem()">Add Item</button>
+<div id="billList" style="margin-top:10px"></div>
+<h3 id="billTotal"></h3>
+</section>
+
+<script>
+function sendOrder(){
+let name=document.getElementById('customerName').value;
+let phone=document.getElementById('customerPhone').value;
+let items=document.getElementById('orderItems').value;
+
+let message=`New Order%0AName: ${name}%0APhone: ${phone}%0AItems: ${items}`;
+window.open(`https://wa.me/919811967930?text=${message}`,'_blank');
+}
+
+let total=0;
+function addBillItem(){
+let item=document.getElementById('billItem').value;
+let price=parseFloat(document.getElementById('billPrice').value);
+
+if(!item||!price)return;
+
+let div=document.createElement('div');
+div.textContent=item+' - ₹'+price;
+document.getElementById('billList').appendChild(div);
+
+total+=price;
+document.getElementById('billTotal').textContent='Total: ₹'+total;
+}
+</script>
+
+</body>
+</html>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Radhe Krishna Stationery Shop</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f5f5f5}
+header{background:#ff6b00;color:white;padding:20px;text-align:center}
 nav{background:#333;padding:10px;text-align:center}
 nav a{color:white;margin:0 15px;text-decoration:none;font-weight:bold}
 section{padding:40px 20px;max-width:1000px;margin:auto;background:white;margin-top:20px;border-radius:8px}
